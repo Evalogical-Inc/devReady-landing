@@ -1,46 +1,96 @@
-# DevReady landing page
+<div align="center">
 
-Static site, no build step. Everything deployable is in **`public/`** (`vercel.json` at the root points Vercel at it and sets security headers):
-`index.html`, `og.png`, `favicon.svg`, `robots.txt`, `sitemap.xml`, `vercel.json`.
-Lives outside the `devready` repo on purpose. `efernce/` (design reference) is git-ignored and is **not** part of the site: never upload it.
+# 🩺 DevReady: landing page
 
-Design: DM Sans, Lucide icons (loaded from unpkg, pinned to 0.469.0), peach-glow light style, scroll and terminal animations (all disabled under `prefers-reduced-motion`). Evalogical CTAs carry UTM tags (`utm_source=devready`) so you can see the traffic in your analytics.
+### The website for [DevReady](https://github.com/Evalogical-Inc/devReady), the read-only environment doctor for developers and AI coding agents.
 
-## 1. Deploy (pick one, all free)
+**Live site: [devready-ten.vercel.app](https://devready-ten.vercel.app/)**
 
-**Cloudflare Pages (recommended)**: global CDN, free HTTPS and custom domain, honors `_headers`.
-1. Push this folder to its own GitHub repo (e.g. `devready-site`).
-2. Cloudflare dashboard > Workers & Pages > Create > Pages > Connect to Git.
-3. Build command: *(empty)*. **Build output directory: `public`**. Deploy. URL: `https://<name>.pages.dev`.
+[![Website](https://img.shields.io/badge/website-devready--ten.vercel.app-ff6a35)](https://devready-ten.vercel.app/)
+[![PyPI](https://img.shields.io/pypi/v/devready-cli)](https://pypi.org/project/devready-cli/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/Evalogical-Inc/devReady/blob/main/LICENSE)
+![Static site](https://img.shields.io/badge/build-none-brightgreen)
 
-**Netlify Drop (fastest)**: drag the **`public`** folder (not the whole project) onto https://app.netlify.com/drop.
+</div>
 
-**GitHub Pages**: needs a custom domain or a `<user>.github.io` repo, because the page uses root paths (`/og.png`). Publish the contents of `public/`.
+---
 
-## 2. Set your real URL (important for SEO)
+## What is DevReady?
 
-The page uses `https://YOUR-SITE.example` for canonical, Open Graph, JSON-LD, robots and sitemap. Once you know the URL, from inside `public/`:
+DevReady is a free, open-source (MIT), zero-dependency CLI. It compares the Node, Python and Git on your machine with what a project declares (`.nvmrc`, `package.json` engines, `requires-python`, ...) and tells you exactly what to fix. It never installs, edits or deletes anything, makes no network calls and sends no telemetry.
+
+It is built for humans, CI pipelines and AI coding agents (Claude Code, Codex, any MCP client).
 
 ```bash
-# bash / Git Bash
-grep -rl "YOUR-SITE.example" . | xargs sed -i 's#https://YOUR-SITE.example#https://devready.pages.dev#g'
+pipx install devready-cli
+devready check
 ```
-```powershell
-# PowerShell
-Get-ChildItem -Recurse -Include *.html,*.txt,*.xml | ForEach-Object { (Get-Content $_ -Raw) -replace 'https://YOUR-SITE.example','https://devready.pages.dev' | Set-Content $_ -NoNewline }
+
+| | |
+|---|---|
+| 🎯 **Project-aware** | Reads the versions your project pins, not just "is Node installed?" |
+| 🔒 **Read-only** | No installs, no edits, no network, no telemetry |
+| 🤖 **Agent-ready** | JSON output, Claude Code plugin, MCP server, `AGENTS.md` |
+| 📦 **Zero dependencies** | Python standard library only, Python 3.10+ |
+
+Full docs, usage, exit codes and roadmap live in the main repo: **[Evalogical-Inc/devReady](https://github.com/Evalogical-Inc/devReady)**. If it saves you an afternoon, a ⭐ there helps others find it.
+
+## About this repo
+
+This repo is only the marketing site. The CLI, plugin and MCP server live in the [main repo](https://github.com/Evalogical-Inc/devReady) and on [PyPI](https://pypi.org/project/devready-cli/).
+
+The page covers:
+
+- Hero with a copyable install command and a simulated terminal run (clearly labelled as a simulation)
+- Feature overview, "use it with AI agents" setup, FAQ and a link to Evalogical
+- SEO and sharing: Open Graph card, JSON-LD (software, organisation, FAQ), `sitemap.xml`, `robots.txt`
+
+## Built with
+
+| | |
+|---|---|
+| **HTML, CSS, vanilla JS** | A single static `index.html`. No framework, no bundler, no build step |
+| **[Lucide](https://lucide.dev/)** | Icons, loaded from unpkg and pinned to 0.469.0 |
+| **[DM Sans / DM Serif Display](https://fonts.google.com/)** | Typography via Google Fonts |
+| **[Vercel](https://vercel.com/)** | Hosting; `vercel.json` serves `public/` and sets security headers (`nosniff`, `X-Frame-Options: DENY`, strict referrer policy) |
+
+Animations (scroll reveals, terminal demo) are disabled under `prefers-reduced-motion`. The page is keyboard navigable and has a skip link.
+
+## Project structure
+
+```text
+public/
+  index.html     the whole site (markup, styles, scripts, JSON-LD)
+  og.png         social share card
+  favicon.svg
+  robots.txt
+  sitemap.xml
+vercel.json      output directory + security headers
 ```
-Then redeploy.
 
-## 3. After it is live
+## Run locally
 
-- Submit `sitemap.xml` in Google Search Console and Bing Webmaster Tools.
-- Check the share card with LinkedIn Post Inspector or by pasting the URL into a chat/social composer.
-- Add the URL as the repo "Website" on GitHub and as `Homepage` in the PyPI project links.
-- Run Lighthouse in Chrome DevTools (aim for 95+ on SEO and Accessibility).
-- Link to the page from evalogical.com (a backlink helps both sites).
+No install needed. Serve the folder with anything:
 
-## Notes
+```bash
+python -m http.server 8000 --directory public
+# open http://localhost:8000
+```
 
-- Fonts come from Google Fonts and icons from unpkg. Self-host both if you want zero third-party requests.
-- The hero terminal is a labelled simulation; the real tool is `devready-cli` on PyPI.
-- Keep `softwareVersion` in the JSON-LD in step with PyPI releases.
+## Deploy
+
+Deploys to Vercel from this repo with no build command; the output directory is `public` (set in `vercel.json`). Any static host works the same way: publish the contents of `public/`. Because the page uses root paths (`/og.png`), serve it from a domain root, not a sub-path.
+
+## Contributing
+
+Typos, accessibility fixes and copy improvements are welcome: open an issue or a PR. For anything about the CLI itself, use the [DevReady issue tracker](https://github.com/Evalogical-Inc/devReady/issues/new/choose) and see its [CONTRIBUTING.md](https://github.com/Evalogical-Inc/devReady/blob/main/CONTRIBUTING.md).
+
+When you ship a new DevReady release, update `softwareVersion` in the JSON-LD block of `index.html` to match PyPI.
+
+## About Evalogical
+
+DevReady is built and maintained by [Evalogical](https://evalogical.com/), a software company offering AI-enabled product engineering, custom software and IT services.
+
+## License
+
+[MIT](https://github.com/Evalogical-Inc/devReady/blob/main/LICENSE) © Evalogical Inc
