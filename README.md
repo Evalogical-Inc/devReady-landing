@@ -1,7 +1,7 @@
 # DevReady landing page
 
-Static site, no build step. Everything deployable is in **`public/`**:
-`index.html`, `og.png`, `favicon.svg`, `robots.txt`, `sitemap.xml`, `_headers`.
+Static site, no build step. Everything deployable is in **`public/`** (`vercel.json` at the root points Vercel at it and sets security headers):
+`index.html`, `og.png`, `favicon.svg`, `robots.txt`, `sitemap.xml`, `vercel.json`.
 Lives outside the `devready` repo on purpose. `efernce/` (design reference) is git-ignored and is **not** part of the site: never upload it.
 
 Design: DM Sans, Lucide icons (loaded from unpkg, pinned to 0.469.0), peach-glow light style, scroll and terminal animations (all disabled under `prefers-reduced-motion`). Evalogical CTAs carry UTM tags (`utm_source=devready`) so you can see the traffic in your analytics.
