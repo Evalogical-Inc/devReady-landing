@@ -115,6 +115,8 @@ p{margin:0}
 .nav a.l:hover,.nav a.l.on{background:#f1f1f3}
 .pill-dark{display:inline-flex;align-items:center;gap:8px;background:#3b3b3e;color:#fff;border-radius:99px;padding:9px 16px;text-decoration:none;font-size:.92rem;font-weight:500;transition:transform .25s var(--ease),background .25s}
 .pill-dark:hover{background:#111;transform:translateY(-1px)}
+.brand{display:inline-flex;align-items:center;gap:8px;padding-right:10px;text-decoration:none;font-weight:700;font-size:1rem;color:#1d1d1f}
+.fine svg{width:14px;height:14px;vertical-align:-2px;color:var(--orange)}
 @media(max-width:700px){.nav a.l{display:none}}
 
 /* ---------- hero ---------- */
@@ -317,11 +319,12 @@ footer{background:var(--foot);color:#e6e6e8}
 
 <div class="navwrap">
   <nav class="nav" aria-label="Primary">
-    <a class="logo" href="/" aria-label="DevReady home"><i data-lucide="shield-check"></i></a>
+    <a class="brand" href="/" aria-label="DevReady home"><span class="logo"><i data-lucide="shield-check"></i></span>DevReady</a>
     <a class="l on" href="#top">Home</a>
     <a class="l" href="#how">Features</a>
     <a class="l" href="#agents">AI agents</a>
     <a class="l" href="#faq">FAQ</a>
+    <a class="l" href="https://github.com/Evalogical-Inc/devReady" target="_blank" rel="noopener">GitHub</a>
     <a class="pill-dark" href="https://evalogical.com/contactus?utm_source=devready&amp;utm_medium=landing&amp;utm_campaign=nav-cta" target="_blank" rel="noopener"><i data-lucide="message-square-more"></i> Talk to Evalogical</a>
   </nav>
 </div>
@@ -336,7 +339,7 @@ footer{background:var(--foot);color:#e6e6e8}
       <code id="cmd">pipx install devready-cli</code>
       <button class="btn-orange" type="button" id="copy"><i data-lucide="copy"></i><span>Copy</span></button>
     </div>
-    <p class="fine a" style="--d:.5s">Free and open source. No account, no telemetry. <a href="https://github.com/Evalogical-Inc/devReady" target="_blank" rel="noopener">View on GitHub</a></p>
+    <p class="fine a" style="--d:.5s"><i data-lucide="heart-handshake"></i> Free and open source. No account, no telemetry. <a href="https://github.com/Evalogical-Inc/devReady" target="_blank" rel="noopener"><i data-lucide="star"></i> Give us a star on GitHub</a></p>
 
     <div class="stage a" style="--d:.65s">
       <div class="window">
