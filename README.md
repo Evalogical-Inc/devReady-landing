@@ -62,7 +62,7 @@ Animations (scroll reveals, terminal demo) are disabled under `prefers-reduced-m
 public/
   index.html     the whole site (markup, styles, scripts, JSON-LD)
   og.png         social share card
-  favicon.svg
+  icon-*.png     logo icon: favicon (32), apple-touch (180), large (512)
   robots.txt
   sitemap.xml
 vercel.json      output directory + security headers
